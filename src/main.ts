@@ -24,7 +24,7 @@ async function bootstrap() {
     whitelist: true, 
   }));
 
-  const port=process.env.PORT || 3000;
+  const port=process.env.PORT || 8888;
 
   console.log("app is running on port...",port)
   
