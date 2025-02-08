@@ -2,19 +2,20 @@ import { Controller, Post, Body, Get, HttpException, HttpStatus, Patch } from '@
 import { UserService } from '../user/user.service';
 import { SignupDto } from './dto/signup.dto';
 import { LoginDto } from './dto/login.dto';
-// import { Public } from 'src/decorators/public.decorators';
 import { UpdateProfileDto } from './dto/update.dto';
+import { Public } from 'src/decorators/public.decorator';
 
 @Controller('user')
-// @Public() // Public decorator to allow open access to these routes
+@Public() 
 export class UserController {
   constructor(
     private readonly userService: UserService,
   ) {}
 
-  // Signup route
+  
   @Post('signup')
   async signup(@Body() signupDto: SignupDto) {
+    console.log("i am signup");
     const { email, password, name } = signupDto;
     return this.userService.createUser(email, password, name);
   }
@@ -36,10 +37,10 @@ export class UserController {
     return profileWithoutPassword; 
   }
 
-  // Edit profile route (you can expand this if needed)
-  // @Public()
+ 
   @Patch('edit')
   async updateProfile(@Body() updateProfileDto: UpdateProfileDto) {
     return this.userService.updateProfile(updateProfileDto);
   }
 }
+
